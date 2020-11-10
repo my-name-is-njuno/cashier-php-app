@@ -19,8 +19,8 @@ class MainController
 
     public function view($view, $data=[])
     {
-    	if(file_exists('/app/views/'.$view.'.php')) {
-    		include_once '/app/views/'.$view.'.php';
+    	if(file_exists('app/views/'.$view.'.php')) {
+    		include_once 'app/views/'.$view.'.php';
     	} else {
     		die('view does not exist');
     	}
@@ -30,8 +30,8 @@ class MainController
 
     public function model($model)
     {
-    	if(file_exists('/app/models/'.$model.'.php')) {
-            include_once '/app/models/'.$model.'.php';
+    	if(file_exists('app/models/'.$model.'.php')) {
+            include_once 'app/models/'.$model.'.php';
             return new $model();
         } else {
             die('model does not exists');
