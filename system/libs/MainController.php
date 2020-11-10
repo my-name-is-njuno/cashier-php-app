@@ -33,8 +33,6 @@ class MainController
     	if(file_exists('app/models/'.$model.'.php')) {
             include_once 'app/models/'.$model.'.php';
             return new $model();
-        } else {
-            die('model does not exists');
-        }
+        } 
     }
 }
