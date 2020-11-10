@@ -3,7 +3,7 @@
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', 'Java_2147483647');
 define('DB_NAME', 'cashier');
 
 
