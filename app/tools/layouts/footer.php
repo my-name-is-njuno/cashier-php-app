@@ -1,28 +1,14 @@
-
-
+<footer class="footer text-center py-2 theme-bg-dark">
+  <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by Petero Njuno</small>
+</footer>
 </div>
-<input type="hidden" value="<?php echo URL_ROOT;?>" id="url_root">
-
-<script src="app/tools/assets/js/jquery.js"></script>
-<script src="app/tools/assets/js/bootstrap.bundle.min.js"></script>
-<script src="app/tools/assets/js/scripts.js"></script>
-<?php
-	if(isset($scripts)) {
-		if(!empty($scripts)) {
-			foreach ($scripts as $value) {		
-?>
-		<script src="app/tools/assets/js/<?php echo $value; ?>"></script>
-		
-<?php 
-			}
-		}
-	}
-	
- ?>
-
- 
+<!-- Javascript -->
+<script src="app/tools/assets/plugins/jquery-3.3.1.min.js"></script>
+<script src="app/tools/assets/plugins/popper.min.js"></script>
+<script src="app/tools/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 
-    </body>
+
+
+</body>
 </html>
-

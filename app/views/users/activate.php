@@ -1,6 +1,7 @@
-<?php 
-	include_once include_path('header.php');
-	include_once include_path('topnav.php');
+<?php
+include_once include_path('header.php');
+include_once include_path('sidenav.php');
+include_once include_path('topnav.php');
 ?>
 
 
@@ -17,7 +18,7 @@
 				 		Activate <?= $data['user']->user_name; ?>
 				 	<?php endif ?>
 				 </h1>
-                
+
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a href="<?php url_to('') ?>">Home</a></li>
                     <li class="breadcrumb-item"><a href="<?php url_to('users/settings') ?>">Settings</a></li>
@@ -30,7 +31,7 @@
 			<div class="col-sm-12">
 				<?php if ($data['user']->user_active): ?>
 					<center>
-						
+
 						<form class="mb-3" method="post" action="<?php url_to('users/activate/'.$data['user']->id); ?>">
 							<p>Are You sure you want to deactivate this user??</p>
 							<button type="submit" class="btn btn-danger">Yes, Deactivate User please</button>
@@ -41,7 +42,7 @@
 
 				<?php else: ?>
 					<center>
-						
+
 						<form class="mb-3" method="post" action="<?php url_to('users/activate/'.$data['user']->id); ?>">
 							<p>Are You sure you want to activate this user??</p>
 							<button type="submit" class="btn btn-success">Yes, Activate User please</button>
@@ -52,8 +53,8 @@
 			</div>
 		</div>
 
-		
-	
+
+
 
 
 
@@ -62,7 +63,6 @@
 
 
 
-
-<?php 
-	include_once include_path('footer.php');
+<?php
+	include_once include_path('footer-admin.php');
 ?>

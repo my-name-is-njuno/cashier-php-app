@@ -1,13 +1,14 @@
-<?php 
-	include_once include_path('header.php');
-	include_once include_path('topnav.php');
+<?php
+include_once include_path('header.php');
+include_once include_path('sidenav.php');
+include_once include_path('topnav.php');
 ?>
 
 <center>
 	<h1>
 		Users Delete - <?php echo $data['user']->user_name; ?>
 	</h1>
-	<?php 
+	<?php
 		include_layouts('message.php');
 	?>
 </center>
@@ -23,13 +24,13 @@
 	</form>
 	<button><a href="<?php url_to('users/show/'.$data['user']->id);?>">No, Take me back</a></button>
 	</center>
-	
+
 </div>
 
 
 
 
 
-<?php 
-	include_once include_path('footer.php');
+<?php
+	include_once include_path('footer-admin.php');
 ?>

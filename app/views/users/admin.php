@@ -1,13 +1,14 @@
-<?php 
-  include_once include_path('header.php');
-  include_once include_path('topnav.php');
+<?php
+include_once include_path('header.php');
+include_once include_path('sidenav.php');
+include_once include_path('topnav.php');
 ?>
 
 
 
   <main>
-    
-  
+
+
     <section class="main">
       <div class="container">
         <h1 class="mt-4">Admin Settings</h1>
@@ -15,7 +16,7 @@
             <li class="breadcrumb-item"><a href="<?php url_to('') ?>">Home</a></li>
             <li class="breadcrumb-item"><a href="<?php url_to('users/settings') ?>">Admin Panel</a></li>
         </ol>
-        
+
     </div>
 
       <div class="container">
@@ -25,7 +26,7 @@
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
-                
+
 
                 <h3 class="profile-username text-center"><?= proper_case($data['user']->user_name) ?></h3>
 
@@ -35,10 +36,10 @@
                   <li class="list-group-item">
                     <b>Employees</b> <a class="float-right"><?= $data['users']['count']-1 ?></a>
                   </li>
-                  
+
                 </ul>
 
-                
+
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -56,10 +57,10 @@
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Your Employes</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#menus" data-toggle="tab">Our Menus</a></li>                                  
+                  <li class="nav-item"><a class="nav-link" href="#menus" data-toggle="tab">Our Menus</a></li>
                   <!-- <li class="nav-item"><a class="nav-link" href="#categorys" data-toggle="tab">Menu Categorys</a></li> -->
-                  
-                  
+
+
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -67,7 +68,7 @@
 
                 <div class="tab-content">
                   <div class="active tab-pane bg-light p-2 m-1" id="activity">
-                    
+
                     <div class="row mb-2 d-flex justify-content-end">
                         <a class="align-item-end btn btn-primary m-1" href="<?php url_to('users/create') ?>">New Employee <i class="fa fa-plus"></i></a>
                         <a class="align-item-end btn btn-dark m-1" href="<?php url_to('roles/create') ?>">New Employee Role <i class="fa fa-plus"></i></a>
@@ -84,7 +85,7 @@
                             Status
                           </th>
                           <th width="7%">
-                            Role 
+                            Role
                           </th>
                           <th width="15%">
                             Joined On
@@ -125,18 +126,18 @@
                                 <?php else: ?>
                                   <a href="<?php url_to('users/activate/'.$user->id) ?>" class="btn btn-sm btn-info">Activate User</a>
                                 <?php endif ?>
-                                
+
                               </td>
                             </tr>
                           <?php endif ?>
-                            
+
                         <?php endforeach ?>
                       </tbody>
                     </table>
-                    
-                    
 
-                   
+
+
+
 
 
                   </div>
@@ -144,7 +145,6 @@
 
 
 
-                 
 
 
 
@@ -158,7 +158,8 @@
 
 
 
-             
+
+
                   <!-- /.tab-pane -->
 
 
@@ -172,7 +173,7 @@
 
 
 
-                   
+
 
 
 
@@ -211,7 +212,7 @@
                   <div class="tab-pane" id="menus">
 
                     <div class="bg-light mb-2 p-2">
-                      
+
                       <div class="row mb-2 d-flex justify-content-end">
                           <a class="align-item-end btn btn-primary m-1" href="<?php url_to('menus/create') ?>">New Menu Item <i class="fa fa-plus"></i></a>
                           <a class="align-item-end btn btn-dark m-1" href="<?php url_to('categorys/create') ?>">New Menu Category <i class="fa fa-plus"></i></a>
@@ -242,7 +243,7 @@
                               <td class="text-right">
                                 Kes: <?= number_format($v->menu_cost) ?>
                               </td>
-                              <td class="text-right"> 
+                              <td class="text-right">
                                 Kes <?= number_format($v->menu_price) ?>
                               </td>
                               <td>
@@ -256,11 +257,11 @@
                         </tbody>
                       </table>
                     </div>
-                    
-                  
-                    
 
-                   
+
+
+
+
 
 
                 </div>
@@ -288,12 +289,12 @@
 
                 <div class="tab-pane" id="newmenus">
 
-                    
-                 
-                      
-                    
-                  
-                    
+
+
+
+
+
+
 
                     <h4>Add New Menu Item</h4>
                     <form class="form-horizontal" method="post" action="<?php url_to('users/menucreate') ?>">
@@ -304,7 +305,7 @@
                           <span class="form-text text-danger"><?php echo $data['menu_item_err'] ?></span>
                         </div>
                       </div>
-                      
+
 
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label">Short Description</label>
@@ -357,11 +358,11 @@
 
 
 
-                     
 
 
-                      
-                     
+
+
+
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
                           <button type="submit" class="btn btn-danger">Submit</button>
@@ -403,6 +404,6 @@
 
 
 
-<?php 
-  include_once include_path('footer.php');
-?>
+  <?php
+  	include_once include_path('footer-admin.php');
+  ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 
@@ -7,27 +7,26 @@
  */
 class Indexs extends MainController
 {
-    
+
     private $user;
     private $role;
-    private $menu;
+    private $post;
     private $category;
 
     public function __construct()
     {
-        
         $this->user =$this->model('User');
         $this->role =$this->model('Role');
-        $this->menu =$this->model('Menu');
-        $this->category =$this->model('category');
+        $this->category =$this->model('Category');
+        $this->post =$this->model('Post');
 
         // first time, create admin user
         $user = $this->user->getAll();
         if($user['count'] == 0) {
             $data_to_store_user = [
                 // 'id' => 1,
-                'user_name' => "Francis",
-                'user_email' => "kariukifrancis100@gmail.com",
+                'user_name' => "Petero",
+                'user_email' => "pmnjuno@gmail.com",
                 'user_password' => password_hash('password', PASSWORD_DEFAULT),
                 'user_role_id' => 1
             ];
@@ -44,37 +43,63 @@ class Indexs extends MainController
             $this->role->add($data_to_store_admin);
 
             $data_to_store_cashier = [
-                'role_name' => "Cashier",
+                'role_name' => "Writer",
                 'role_by' => 1
             ];
             $this->role->add($data_to_store_cashier);
 
         }
 
-        if(!get_sess('logged_in')) {
-            // set_sess("message_error", "You have to be logged to access this app");
-            redirect_to("users/login");            
-        }
-        
+
+
     }
+
 
 
 
     public function home()
     {
+        $data = [];
+        // $data['posts'] = $this->post->getAll();
+    	  $this->view('home', $data);
+    }
+
+
+
+
+
+
+
+    public function about()
+    {
+        $data = [];
+    	  $this->view('about', $data);
+    }
+
+
+
+
+
+
+
+
+
+
+    public function admin()
+    {
         if(!get_sess('logged_in')) {
-            redirect_to("users/login");            
+            redirect_to("users/login");
         }
         $data = [];
 
-        $data['menus'] = $this->menu->getAll();
+        $data['posts'] = $this->post->getAll();
         $data['categorys'] = $this->category->getAll();
 
     	$this->view('home', $data);
     }
 
 
-    
 
-    
+
+
 }

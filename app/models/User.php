@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 
 
 /**
  * user
  */
-class User 
+class User
 {
 
 	private $db;
@@ -23,6 +23,13 @@ class User
     {
         return $this->db->getAll($this->table);
     }
+
+    public function all_for_show()
+    {
+        $sql = "SELECT users.*, roles.role_name FROM users inner join roles on users.user_role_id = roles.id ";
+        return $this->db->getManySql($sql);
+    }
+
 
     // insert a new user
     public function add($data)
@@ -42,6 +49,23 @@ class User
         return $this->db->get($this->table, $id);
     }
 
+
+    // find a user with id
+    public function find_for_show($id)
+    {
+        $sql = "SELECT users.user_name, users.user_email, roles.role_name FROM $this->table INNER JOIN roles ON users.user_role_id = roles.id  WHERE users.id = '$id'";
+        return $this->db->getOneSql($sql);
+    }
+
+
+
+    public function get_user_blogs($id)
+    {
+        $sql = "SELECT posts.*, categorys.category_name FROM posts INNER JOIN categorys ON posts.post_category_id = categorys.id  WHERE posts.post_user_id = '$id'";
+        return $this->db->getManySql($sql);
+    }
+
+
     // delete a user
     public function delete($id)
     {
@@ -49,16 +73,7 @@ class User
     }
 
 
-    // inactivate user
-    public function deactivate($id)
-    {
-        // set data for deactivating
-        $data = ['user_active' => 0, 'user-deactivated_at' => date('Y-m-d H:i:s')];
-        return $this->db->update($this->table, $id, $data);
-    }
 
-
-    // 
     public function checkIfEmailExist($email)
     {
         $exists = $this->db->getOne($this->table, 'user_email', $email);
@@ -116,11 +131,11 @@ class User
 
 
 
-   
 
 
 
-   
+
+
 
 
 
@@ -149,10 +164,10 @@ class User
     // check if user has a certain role
     public function getUsersRoles($id)
     {
-       $sql = "SELECT $this->table.*, users_roles.user_id, users_roles.role_id, roles.role_name 
+       $sql = "SELECT $this->table.*, users_roles.user_id, users_roles.role_id, roles.role_name
                FROM users_roles
-               INNER JOIN $this->table ON $this->table.id = users_roles.user_id 
-               INNER JOIN roles ON users_roles.role_id = roles.id 
+               INNER JOIN $this->table ON $this->table.id = users_roles.user_id
+               INNER JOIN roles ON users_roles.role_id = roles.id
                WHERE users_roles.user_id = :id";
         $this->db->query($sql);
         $this->db->bind(':id', $id);
@@ -165,13 +180,13 @@ class User
 
 
 
-    // return users with certain role 
+    // return users with certain role
     public function users_who_can($role)
     {
-        $sql = "SELECT $this->table.*, users_roles.user_id, users_roles.role_id, roles.role_name 
+        $sql = "SELECT $this->table.*, users_roles.user_id, users_roles.role_id, roles.role_name
                FROM $this->table.
-               INNER JOIN users_roles ON $this->table.id = users_roles.user_id 
-               INNER JOIN roles ON users_roles.role_id = roles.id 
+               INNER JOIN users_roles ON $this->table.id = users_roles.user_id
+               INNER JOIN roles ON users_roles.role_id = roles.id
                WHERE roles.id = :id";
         $this->db->query($sql);
         $this->db->bind(':id', $id);
@@ -214,8 +229,8 @@ class User
     public function getAll()
     {
         $sql = "SELECT $this->table.*, roles.role_name, roles.id as rid, Count(activitys.id) as cnt
-                FROM $this->table 
-                LEFT JOIN activitys ON $this->table.id=activitys.activity_user_id 
+                FROM $this->table
+                LEFT JOIN activitys ON $this->table.id=activitys.activity_user_id
                 INNER JOIN roles ON users.user_role_id = roles.id
                 GROUP BY $this->table.id ORDER BY cnt DESC";
         return $this->db->getManySql($sql);
@@ -229,9 +244,9 @@ class User
     public function user_whose_role_is($id)
     {
         $sql = "SELECT $this->table.*, roles.role_name, roles.id as rid, Count(activitys.id) as cnt
-                FROM $this->table 
-                LEFT JOIN activitys ON $this->table.id=activitys.activity_user_id 
-                INNER JOIN roles ON users.user_role_id = roles.id 
+                FROM $this->table
+                LEFT JOIN activitys ON $this->table.id=activitys.activity_user_id
+                INNER JOIN roles ON users.user_role_id = roles.id
                 WHERE user_role_id = '$id'
                 GROUP BY $this->table.id ORDER BY cnt DESC";
         return $this->db->getManySql($sql);

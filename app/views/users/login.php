@@ -1,4 +1,4 @@
-<?php 
+<?php
 	include_once include_path('header.php');
 ?>
 
@@ -34,25 +34,25 @@
                                             </div>
                                         </form>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </main>
             </div>
-            <div id="layoutAuthentication_footer">
-                <footer class="py-4 bg-light mt-auto">
+            <!-- <div id="layoutAuthentication_footer">
+                <footer class="py-4 bg-light mt-auto my-5">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; <?php echo APP_NAME; ?> <?= date('Y') ?></div>
+                            <div class="text-muted">Copyright &copy; </div>
                             <div>
-                         
+
                             </div>
                         </div>
                     </div>
                 </footer>
-            </div>
+            </div> -->
         </div>
 
 
@@ -62,6 +62,6 @@
 
 
 
-<?php 
-	include_once include_path('footer.php');
+<?php
+	include_once include_path('footer-admin.php');
 ?>

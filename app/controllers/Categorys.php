@@ -1,4 +1,4 @@
-<?php  
+<?php
 
 
 
@@ -20,10 +20,10 @@ class Categorys extends MainController
         // check if user is logged in
         if(!get_sess('logged_in')) {
             set_sess("message_error", "You have to be logged in to access this functionality");
-            redirect_to("users/login");            
+            redirect_to("users/login");
         }
 
-        // load models 
+        // load models
         $this->category = $this->model('Category');
         $this->menu = $this->model('Menu');
 
@@ -36,11 +36,8 @@ class Categorys extends MainController
     {
     	// iniatilaize data
     	$data = [];
-
-        // get all categorys 
-        $data['categorys'] = $this->category->getAll();
-
-
+      // get all categorys
+      $data['categorys'] = $this->category->getAll();
     	// load view with data
     	$this->view('categorys/index', $data);
     }
@@ -74,7 +71,7 @@ class Categorys extends MainController
     			$data['category_name_err'] = "Name of the category is required";
     		}
 
-    		// check for validation errors 
+    		// check for validation errors
     		if(empty($data['category_name_err'])) {
     			// store data to db and redirect to categorys home
     			$stored = $this->category->add($data_to_store);
@@ -95,7 +92,7 @@ class Categorys extends MainController
     	} else {
     		// load view
     		$this->view('categorys/create', $data);
-    	}	
+    	}
     }
 
 
@@ -112,15 +109,7 @@ class Categorys extends MainController
     	$category = $this->category->find($id);
     	// check if null is returned
     	if($category['count']>0) {
-
-            // menus under this category
-            $menus = $this->menu->get_menu_items_for_category($id);
-            $data['menus'] = $menus;
-
-    		// not null, load view with category
-    		$data['category'] = $category['data'];
     		$this->view('categorys/show', $data);
-
     	} else {
     		// load 404 with error
     		$data['error'] = "category queried for does not exist";
@@ -144,18 +133,18 @@ class Categorys extends MainController
 
         // get the category to edit
         $category = $this->category->find($id);
-        // check if category fetched exists 
+        // check if category fetched exists
         if($category['count']<1) {
             // send to 404 with error
             $data['error'] = "category queried for does not exist";
             $this->view('errors/404', $data);
             return;
-        } 
+        }
 
         // load category name in data array
         $data['category'] = $category['data'];
         $data['category_name'] = $category['data']->category_name;
-        
+
 
         // check if post method
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -212,7 +201,7 @@ class Categorys extends MainController
         $data = [];
         // get the category to delete
         $category = $this->category->find($id);
-        // check if category fetched exists 
+        // check if category fetched exists
         if($category['count'] != 1) {
             // send to 404 with error
             $data['error'] = "category queried for does not exist";
