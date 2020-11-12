@@ -39,6 +39,7 @@ class Users extends MainController
             $data['users'] = $this->user->all_for_show()['data'];
             $this->view('users/index', $data);
         } else {
+            set_sess('message_error', 'You have to be admin to access that page');
             redirect_to('users/profile');
         }
     }
@@ -270,7 +271,7 @@ class Users extends MainController
         $data = [];
 
         if (get_sess('logged_in_user_id') != 1) {
-            set_sess('error', 'You cannot view other people profiles');
+            set_sess('message_error', 'You cannot view other people profiles');
             redirect_to('users/profile');
         }
 
@@ -401,6 +402,12 @@ class Users extends MainController
 
     public function delete($id)
     {
+
+        if(get_sess('logged_in_user_id') != 1) {
+            set_sess('message_info', 'You need to be admin to access this page');
+            redirect_to('users/profile');
+            return;
+        }
         // initialize data;
         $data = [];
         // get the user to delete
@@ -412,11 +419,21 @@ class Users extends MainController
             $this->view('errors/404', $data);
             return;
         } else {
+            $data['deletable'] = true;
+            $blogs = $this->user->get_user_blogs($id);
+            if($blogs['count'] > 0) {
+                $data['deletable'] = false;
+            }
             // check if request is POST
             if($_SERVER['REQUEST_METHOD'] == "POST") {
                 // delete and redirect
+                if($blogs['count'] > 0) {
+                    foreach ($blogs['data'] as $v) {
+                        $this->post->delete($v->id);
+                    }
+                }
                 $this->user->delete($id);
-                set_sess("message_info", "user deleted successfully");
+                set_sess("message_info", "User deleted successfully");
                 redirect_to('users');
             } else {
                 // load view to confirm delete

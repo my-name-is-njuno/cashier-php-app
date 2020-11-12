@@ -6,7 +6,7 @@ include_once include_path('topnav-admin.php');
 
 	<main>
             <div class="container">
-                <h3 class="mt-4">Add New Employee</h3>
+                <h3 class="mt-4">Add New User</h3>
                 <?php include_once include_path('message.php'); ?>
 
                 <div class="card mb-4">
